@@ -23,12 +23,15 @@ namespace AZBlue.Function
             log.LogInformation($"DeliveryCount={deliveryCount}");
             log.LogInformation($"MessageId={messageId}");
 
+            var ShipMethod = myQueueItem;
+
             var str = Environment.GetEnvironmentVariable("SQLConnectionString");
             using (SqlConnection conn = new SqlConnection(str))
             {
                 conn.Open();
                 var text = "UPDATE SalesLT.SalesOrderHeader " +
-                        "SET [ShipMethod] = 'UPS' WHERE ShipDate < GetDate();";
+                        //"SET [ShipMethod] = 'UPS' WHERE ShipDate < GetDate();";
+                        "SET [ShipMethod] = " + "'" + ShipMethod + "'" + " WHERE ShipDate < GetDate();";
 
                 using (SqlCommand cmd = new SqlCommand(text, conn))
                 {
