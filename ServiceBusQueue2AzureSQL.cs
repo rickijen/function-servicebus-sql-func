@@ -30,7 +30,6 @@ namespace AZBlue.Function
             {
                 conn.Open();
                 var text = "UPDATE SalesLT.SalesOrderHeader " +
-                        //"SET [ShipMethod] = 'UPS' WHERE ShipDate < GetDate();";
                         "SET [ShipMethod] = " + "'" + ShipMethod + "'" + " WHERE ShipDate < GetDate();";
 
                 using (SqlCommand cmd = new SqlCommand(text, conn))
